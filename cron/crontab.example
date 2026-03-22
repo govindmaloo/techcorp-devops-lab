@@ -1,0 +1,16 @@
+# Tuesday 00:00 — pick ONE style (A or B).
+#
+# A) Root user crontab: sudo crontab -e
+#    (no user column; 5 time fields + command)
+
+SCRIPT_DIR=/opt/devops-lab/tls/scripts
+
+0 0 * * 2 /usr/bin/bash ${SCRIPT_DIR}/backup_apache_sarah.sh
+0 0 * * 2 /usr/bin/bash ${SCRIPT_DIR}/backup_nginx_mike.sh
+
+# B) System drop-in (e.g. /etc/cron.d/devops-backups) — includes user column "root":
+# 0 0 * * 2 root /usr/bin/bash /opt/devops-lab/tls/scripts/backup_apache_sarah.sh
+# 0 0 * * 2 root /usr/bin/bash /opt/devops-lab/tls/scripts/backup_nginx_mike.sh
+
+# Optional Task 1 — hourly metrics:
+# 0 * * * * SYSMETRICS_LOG_DIR=/var/log/sysmetrics /usr/bin/bash ${SCRIPT_DIR}/collect_system_metrics.sh

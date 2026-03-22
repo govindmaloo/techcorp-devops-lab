@@ -1,0 +1,8 @@
+# Install: sudo cp devops-backups.cron /etc/cron.d/devops-backups && sudo chmod 644 /etc/cron.d/devops-backups
+# Edit SCRIPT paths to match your server.
+
+SHELL=/bin/bash
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+
+0 0 * * 2 root /usr/bin/bash /opt/devops-lab/tls/scripts/backup_apache_sarah.sh
+0 0 * * 2 root /usr/bin/bash /opt/devops-lab/tls/scripts/backup_nginx_mike.sh
