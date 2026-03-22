@@ -4,6 +4,38 @@
 
 ---
 
+## 0. Docker lab (evidence capture)
+
+The repository includes a **Rocky Linux 9** image (`docker/Dockerfile`) with httpd, nginx, cron, htop, nmon, users **sarah** / **mike**, Tuesday 00:00 backup jobs in `/etc/cron.d/devops-backups`, and host-mounted `docker-artifacts/` for backups and metrics logs.
+
+**Build and run (from repo root):**
+
+```bash
+docker compose -f docker/docker-compose.yml up -d --build
+```
+
+**Task 1 — screenshot of `htop` (interactive):**
+
+```bash
+docker compose -f docker/docker-compose.yml exec -it lab htop
+```
+
+**Tasks 1–3 — single scrollable terminal transcript (screenshot or attach text):**
+
+```bash
+docker compose -f docker/docker-compose.yml run --rm --entrypoint /bin/bash lab \
+  /opt/devops-lab/tls/docker/verify-deliverables.sh
+```
+
+After the verify run, backup archives and verification logs are also on the host under `docker-artifacts/backups/`. Lab-only login passwords are documented in `README.md` (Docker section); they are **not** for production.
+
+### Challenges encountered (Docker)
+
+- Apache and nginx both default to port 80; nginx in the image is reconfigured to **8080** inside the container (host maps **8080→Apache**, **8081→nginx**).
+- `docker compose run` starts a one-off container without the long-running entrypoint; that is intentional so verify output is easy to capture in one shot.
+
+---
+
 ## 1. Task 1 — System monitoring
 
 ### Implementation summary
@@ -74,7 +106,7 @@
 
 ## 4. Repository
 
-**GitHub URL:** *(add after you push)*
+**GitHub URL:** https://github.com/govindmaloo/techcorp-devops-lab
 
 ---
 
